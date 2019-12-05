@@ -1,0 +1,164 @@
+---
+title: "Genomic selection basics"
+date: "October, 2018"
+author:
+  - name: M Perez-Enciso
+    email: miguel.perez@uab.es
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '1'
+    toc_float: true
+  word_document:
+    toc: yes
+    toc_depth: '1'
+  theme: hpstr
+  md_document:
+    variant: markdown_github
+  highlight: github---
+  prettydoc::html_pretty:
+    theme: hpstr
+    highlight: github
+    toc: yes
+    toc_depth: '1'
+  pdf_document:
+    toc: yes
+    toc_depth: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Modified from G. de los Campos (gdeloscampos@epi.msu.edu).
+
+```{r, include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+#If you don't have installed the BGLR or glmnet packages, please run the following lines 
+#install.packages("BGLR",repos="https://cran.r-project.org/")
+#install.packages("glmnet",repos="https://cran.r-project.org/")
+rm(list=ls())
+library(BGLR)
+library(glmnet)
+```
+
+The wheat data are described in https://rdrr.io/cran/BGLR/man/wheat.html
+
+```{r, include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+data(wheat)
+# marker data
+X=wheat.X
+# phenotypes
+Y=wheat.Y
+# N obs
+N=nrow(X)
+# N markers
+p = ncol(X)
+# phenotype
+y = Y[,2]
+```
+
+
+## Partition
+Prediction methods are evaluated by partitioning the whole dataset in two groups. The training partition is used for adjusting model parameters. Next, the observed and predicted phenotypes with the TRN adjusted model are compared.
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# training set comprises 80% of data
+trn<-sample(1:N, size=N*0.8, replace=FALSE)
+XTRN<-X[trn,] ; yTRN<-y[trn]; 
+# testing test
+XTST<-X[-trn,] ; yTST<-y[-trn]
+```
+
+# GLMNET package
+'GLMNET (https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) is a package that fits a generalized linear model via penalized maximum likelihood. The regularization path is computed for the lasso or elasticnet penalty at a grid of values for the regularization parameter lambda. The algorithm is extremely fast, and can exploit sparsity in the input matrix  x. It fits linear, logistic and multinomial, poisson, and Cox regression models. A variety of predictions can be made from the fitted models. It can also fit multi-response linear regression'.
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# alpha 0 gives Ridge Regression
+ fmRR=glmnet(y=yTRN,x=XTRN,lambda=.1, alpha=0)
+ 
+# alpha 1 gives Lassso
+ fmL=glmnet(y=yTRN,x=XTRN,lambda=.1, alpha=1)
+ 
+# alpha between 0 and 1 gives elastic net
+ fmEN=glmnet(y=yTRN,x=XTRN,lambda=.1, alpha=0.5)
+
+ yHatRR = fmRR$a0 + XTST%*%fmRR$beta[,1]
+ yHatL = fmL$a0 + XTST%*%fmL$beta[,1]
+ yHatEN = fmEN$a0 + XTST%*%fmEN$beta[,1]
+
+ cor(yHatRR,yTST)
+ cor(yHatL,yTST)
+ cor(yHatEN,yTST)
+```
+
+EXECRCISE: plot corr for a grid of alpha values
+
+# BGLR package
+'The BGLR Package (Perez-Rodriguez & de los Campos, 2014) implements a variety of shrinkage and variable selection regression procedures'.
+
+### Fits the whole dataset, Bayesian Ridge Regression (GBLUP)
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+ETA<-list(list(X=X,model="BRR"))
+fm<-BGLR(y=y,ETA=ETA,nIter=10000,burnIn=2000,verbose=FALSE)
+
+# trace plot of the residual variance
+varE<- scan("varE.dat")
+plot(varE,type="o",col=2,cex=.5)
+abline(h=fm$varE,col=4, lwd=2)
+```
+
+## Assess predictive accuracy with different models using BGLR
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+### removes phenotypes from TST partition
+yNA = y
+yNA[-trn] = NA
+
+### ridge
+ETA<-list(list(X=X,model="BRR"))
+fmRR<-BGLR(y=yNA,ETA=ETA,nIter=5000,burnIn=2000,verbose=FALSE)
+
+### BayesA(Scaled-t prior)
+ETA<-list(list(X=X,model="BayesA"))
+fmBA<-BGLR(y=yNA,ETA=ETA,nIter=5000,burnIn=2000,verbose=FALSE)
+
+### BayesB (point of mass at zero + scaled-t slab)
+ETA<-list(list(X=X,model="BayesB"))
+fmBB<-BGLR(y=yNA,ETA=ETA,nIter=5000,burnIn=2000,verbose=FALSE)
+
+## plots of estimates
+plot(fmRR$ETA[[1]]$b,col=4,ylab='Estimate',main='BRR')
+
+### corr between predicted and observed
+cor(fmRR$yHat[-trn], y[-trn])
+cor(fmBA$yHat[-trn], y[-trn])
+cor(fmBB$yHat[-trn], y[-trn])
+
+plot(y[-trn], fmRR$yHat[-trn],col=4,ylab='Observed y',xlab='BRR prediction')
+plot(y[-trn], fmBA$yHat[-trn],col=4,ylab='Observed y',xlab='BRR prediction')
+plot(y[-trn], fmBB$yHat[-trn],col=4,ylab='Observed y',xlab='BRR prediction')
+
+```
+
+# GBLUP
+### requires GRM of all individuals
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+## GRM
+G<-tcrossprod(scale(X,center=T,scale=T))
+G<-G/mean(diag(G))
+diag(G) = diag(G)*1.05
+EVD<-eigen(G)
+PC<-EVD$vectors%*%diag(sqrt(EVD$values))
+ETA=list(list(X=PC,model='BRR'))
+  
+fmGB<-BGLR(y=yNA,ETA=ETA,nIter=5000,burnIn=2000,verbose=F)
+
+### corr between predicted and observed
+cor(fmGB$yHat[-trn], y[-trn])
+plot(y[-trn], fmGB$yHat[-trn],col=4,ylab='Observed y',xlab='BRR prediction')
+
+```
+
+Note that all methods result in similar accuracies
+
+# Single step
+### complete A inverse
+### inverse of genotyped individuals GRM
+

@@ -1,0 +1,212 @@
+---
+title: "GWAS: a practical application"
+date: "October, 2018"
+author:
+  - name: M Perez-Enciso
+    email: miguel.perez@uab.es
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '1'
+    toc_float: true
+  pdf_document:
+    toc: yes
+    toc_depth: 1
+  theme: hpstr
+  md_document:
+    variant: markdown_github
+  highlight: github---
+  prettydoc::html_pretty:
+    theme: hpstr
+    highlight: github
+    toc: yes
+    toc_depth: '1'
+  word_document:
+    toc: yes
+    toc_depth: '1'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# GWAS software
+One of the most popular softwares for GWAS and SNP management is Plink, which uses its own format:
+
+https://www.cog-genomics.org/plink/1.9/ 
+
+Other softwares are:
+
+GCTA: compute marker relationship matrix
+http://www.complextraitgenomics.com/software/gcta/download.html
+
+SNPassoc: R for association
+http://cran.r-project.org/web/packages/SNPassoc/index.html
+
+GenABEL: complex, mixed model modeling
+http://www.genabel.org/packages/GenABEL
+
+
+Here we will use R to illustrate the basics of GWAS.
+The wheat data are described in https://rdrr.io/cran/BGLR/man/wheat.html
+
+```{r, include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+#If you don't have installed the BGLR package, please run the following line 
+#install.packages("BGLR",repos="https://cran.r-project.org/")
+#else 
+rm(list=ls())
+library(BGLR)
+data(wheat)
+# marker data
+X=wheat.X
+# phenotypes
+Y=wheat.Y
+```
+
+## Compute disequilibrium
+
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# num of individuals
+N<-nrow(X) 
+# num of markers
+p = ncol(X)
+# compute linkage disequilibrium between consecutive markers
+LD = vector(length=(p-1))
+for(i in 1:(p-1)){
+    LD[i] = abs(cor(X[,i],X[,i+1]))
+}
+plot(LD, main='Corr between consecutive marker genotypes')
+
+```
+
+
+## Simulate QTL positions and effects 
+Based on a script from G. de los Campos (gdeloscampos@epi.msu.edu).
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# desired h2
+h2 = 0.5
+# number of QTLs
+nQTL = 2
+# QTL positions
+QTL = sort(sample(seq(1,p))[1:nQTL])
+# QTL effects
+b = rgamma(shape=0.2, rate=0.2 ,n=nQTL)
+```
+
+## Plot of QTL effects
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+hist(rgamma(shape=0.2, rate=0.2 ,n=1000),breaks=100)
+```
+
+## Generating genetic values and phenotypes: 
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# genetic effects
+g = X[,QTL] %*% b
+vg = var(g)
+print(b)
+
+# adjust var e to suit desired h2
+ve = (1.-h2)*vg/h2
+n = nrow(X) 
+p = ncol(X)
+
+# generate phenotypes
+y = g + rnorm(mean=0,sd=sqrt(ve),n=n)
+
+# plot between y and g
+plot(g,y, xlab='genetic values', ylab='phenotypes')
+# correlation (expected is (h2)??)
+cor(y,g); cor(g,y)**2
+
+# GWAS using least squares
+RESULTS=matrix(nrow=p,ncol=4,NA)
+colnames(RESULTS)=c('estimate','SE','t-value','p-value')
+for(i in 1:p){
+    fm=summary(lm(y~X[,i]))
+    RESULTS[i,]=fm$coef[2,]
+}
+```
+
+# 
+## Exercise: Inspect lm function in R
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# general help
+help(lm)
+# eg last marker
+fm=lm(y~X[,p])
+summary(fm)
+```
+
+## GWAS plot
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+plot(-log10(RESULTS[,4]),cex=.5,col=2,type='o',ylab='-log10 p-value', xlab='marker')
+points(x=QTL,y=-log10(RESULTS[QTL,4]),col=4,pch=19)
+abline(h=-log10(.05))
+```
+
+## False Discovery Rate
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# correction for many tests (FDR)
+pValues=RESULTS[,4]
+fdr_adjusted=p.adjust(pValues,method='fdr')
+# FDR-cutoff (pvalue corresponding to FDR=0.05)
+max(pValues[which(fdr_adjusted<.05)])
+plot(pValues, fdr_adjusted)
+```
+
+## Principal Component Analysis
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+G = tcrossprod(scale(X,center=T,scale=T))
+G = G/mean(diag(G))
+diag(G) = diag(G)*1.05
+EVD<-eigen(G)
+PC<-EVD$vectors%*%diag(sqrt(EVD$values))
+pcVar = EVD$values/sum(EVD$values)
+plot(PC[,1:2], xlab=c('%var = ',pcVar[1]), ylab=c('%var = ',pcVar[2]))
+
+```
+
+# GWAS using first two PCs
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+RESULTS=matrix(nrow=p,ncol=4,NA)
+colnames(RESULTS)=c('estimate','SE','t-value','p-value')
+for(i in 1:p){
+    fm=summary(lm(y~X[,i]+PC[,1:2]))
+    RESULTS[i,]=fm$coef[2,]
+}
+
+# plot
+plot(-log10(RESULTS[,4]),cex=.5,col=2,type='o',ylab='-log10 p-value', xlab='marker', main='PCA corrected GWAS')
+points(x=QTL,y=-log10(RESULTS[QTL,4]),col=4,pch=19)
+abline(h=-log10(.05))
+```
+
+# Exercises:
+ Is there structuring?
+ 
+ Compare pure and PC corrected GWAS
+ 
+ Repeat the analyses with only one and 10 principal components
+ 
+ Repeat analysis with true phenotypes
+ 
+ The wheat data are described in https://rdrr.io/cran/BGLR/man/wheat.html
+ 
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# true phenotypes (4 variables)
+Y = wheat.Y
+```  
+
+ Investigate the impact of other qtl effect distributions on GWAS plot
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# desired h2
+h2 = 0.5
+# number of QTLs
+nQTL = 10
+# QTL positions
+QTL = sort(sample(seq(1,p))[1:nQTL])
+# QTL effects
+b = rgamma(shape=0.2, rate=0.2 ,n=nQTL)
+# how about an uniform distribution
+```  
