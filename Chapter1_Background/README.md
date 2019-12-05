@@ -10,7 +10,7 @@ PopGenome: An Efficient Swiss Army Knife for Population Genomic Analyses
 https://cran.r-project.org/web/packages/PopGenome/
 
 Simple genetic drift program
-
+  
 ``
   #----- simulates drift
   # N is population size and p is initial allele frequency
@@ -30,4 +30,5 @@ Simple genetic drift program
 ``
 
 EXERCISE: Guess what the program does and why
-HINT: look for help with ‘help(command)’ or ‘? command’
+
+  
