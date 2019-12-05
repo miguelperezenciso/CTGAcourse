@@ -30,4 +30,23 @@ Simple genetic drift program
 
 EXERCISE: Guess what the program does and why
 
+Running the drift R function
+
+    # num of individuals
+    N=20
+    # initial allele frequency
+    p0=.2
+    f=drift(N,p0)
+    # list of colors for plotting each replicate
+    color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+    plot(f, type='l', ylim=c(0,1), xlim=c(1,30), xlab='generation', ylab='f')
+    for (rep in seq(100)) {
+        f = drift(N, p0)
+        lines(f, col=sample(color,1))
+    }
+    
+EXERCISES 
+- try different sizes (N) an dinitial frequencies (p)
+- What is the probability of fixation of allele 1 ?
+
   
