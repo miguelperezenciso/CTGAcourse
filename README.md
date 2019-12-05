@@ -8,11 +8,11 @@ First, please browse the [overview](https://github.com/miguelperezenciso/CTGAcou
 
 So far, the course is organized as follows:
 
-- Background
-- Genome Wide Association Studies (GWAS)
-- Genomic Prediction
-- Next Generation Sequence data analysis
-- Machine Learning
+- [Background](https://github.com/miguelperezenciso/CTGAcourse/tree/master/Chapter1_Background)
+- [Genome Wide Association Studies (GWAS](https://github.com/miguelperezenciso/CTGAcourse/tree/master/Chapter2_GWAS)
+- [Genomic Prediction](https://github.com/miguelperezenciso/CTGAcourse/tree/master/Chapter3_GS)
+- [Next Generation Sequence data analysis](https://github.com/miguelperezenciso/CTGAcourse/tree/master/Chapter4_NGS)
+- [Machine Learning](https://github.com/miguelperezenciso/CTGAcourse/tree/master/Chapter5_ML)
 
 Not all chapters are equally well developed, especially the machine learning one. Machine Learning in genomics will be fully developed in future independent notes.
 
