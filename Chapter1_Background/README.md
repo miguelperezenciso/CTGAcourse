@@ -11,7 +11,7 @@ https://cran.r-project.org/web/packages/PopGenome/
 
 Simple genetic drift program
 
-`
+``
   #----- simulates drift
   # N is population size and p is initial allele frequency
   drift <- function(N,p) {
@@ -27,7 +27,7 @@ Simple genetic drift program
     }
     return(g[,N+1])
   }
-`
+``
 
 EXERCISE: Guess what the program does and why
 HINT: look for help with ‘help(command)’ or ‘? command’
