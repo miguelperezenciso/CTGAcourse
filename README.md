@@ -18,4 +18,4 @@ Not all chapters are equally well developed, especially the machine learning one
 
 This course was first taught in wonderful Salvador de Bahia in November 2018 thanks to my good friend and former student Luis Fernando Batista, from [UFBA](https://www.ufba.br/).
 
-### NOTE: These notes are somewhat incomplete but will be improving in the very near future.
+### These notes are somewhat incomplete but will be improving in the very near future.
