@@ -16,6 +16,6 @@ So far, the course is organized as follows:
 
 Not all chapters are equally well developed, especially the machine learning one. Machine Learning in genomics will be fully developed in future independent notes.
 
-This course was first taught in wonderful Salvador de Bahia in November 2018 thanks to my good friend and former student Luis Fernando Batista, from UFBA.
+This course was first taught in wonderful Salvador de Bahia in November 2018 thanks to my good friend and former student Luis Fernando Batista, from [UFBA](https://www.ufba.br/).
 
 ### NOTE: These notes are somewhat incomplete but will be improving in the very near future.
