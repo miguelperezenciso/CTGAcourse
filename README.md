@@ -4,6 +4,8 @@
 
 Most of the genes that are of socioeconomic importance, e.g., genes affecting disease susceptibility or that makes Iberian pig meat taste good, are very difficult to find because they are influenced by many genes of small effect. The notes here deal with concepts and statistical and computational tools that help us to identify these genes. A topic of particular interest is combining different sources of molecular information, including complete genome sequence, to predict genetic merit.
 
+First, please browse the [overview](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Overview.pdf) slides.
+
 So far, the course is organized as follows:
 
 - Background
