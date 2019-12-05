@@ -1,0 +1,93 @@
+---
+title: "Genetic drift"
+date: "October, 2018"
+author:
+  - name: M Perez-Enciso
+    email: miguel.perez@uab.es
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '1'
+    toc_float: true
+  pdf_document:
+    toc: yes
+    toc_depth: 1
+  theme: hpstr
+  md_document:
+    variant: markdown_github
+  highlight: github---
+  prettydoc::html_pretty:
+    theme: hpstr
+    highlight: github
+    toc: yes
+    toc_depth: '1'
+  word_document:
+    toc: yes
+    toc_depth: '1'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Some popular R packages for population genetics
+Population genetics in R
+
+http://grunwaldlab.github.io/Population_Genetics_in_R/
+
+PopGenome: An Efficient Swiss Army Knife for Population Genomic Analyses
+
+https://cran.r-project.org/web/packages/PopGenome/
+
+# Simple genetic drift program
+### Before starting, think what is genetic drift?
+### 
+```{r, include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+#----- simulates drift
+# N is population size and p is initial allele frequency
+drift <- function(N,p) {
+   g=as.numeric()
+   t=0
+   while(p>0 & p<1) {
+      genotypes <- rbinom(N,1,p)
+      p<-mean(genotypes)
+      t=t+1
+      # the last column of each row contains current allele frequency
+      genotypes=cbind(t(genotypes),p)
+      g=rbind(g,genotypes)
+   }
+   return(g[,N+1])
+}
+```
+
+EXERCISE: Guess what the program does and why
+
+HINT:  look for help with 'help(command)' or '? command'
+
+HELP in R: https://www.r-project.org/help.html
+
+## Running the drift R function
+
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# num of individuals
+N=20
+# initial allele frequency
+p0=.2
+f=drift(N,p0)
+```
+
+```{r  include=TRUE,warning=FALSE,echo=TRUE,eval=TRUE}
+# list of colors for plotting each replicate
+color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+plot(f, type='l', ylim=c(0,1), xlim=c(1,30), xlab='generation', ylab='f')
+for (rep in seq(100)) {
+    f = drift(N, p0)
+    lines(f, col=sample(color,1))
+}
+```
+
+EXERCISE: try different sizes (N) an dinitial frequencies (p)
+
+EXERCISE: What is the probability of fixation of allele 1 ?
+
