@@ -56,27 +56,30 @@ There are numerous metrics for DNA variability. The two main ones are Wattersonâ
 
 Under a neutral model (i.e., only drift, panmixia and constant effective size), both estimators should be the same.
   
-TOY EXERCISE
+#### TOY EXERCISE
 Here is a list of 7 aligned sequences
 
 AAATTTTCCGGCA
+
 .............
+
 ..T.........G
+
 .............
+
 ......A......
+
 .........C...
+
 ..T..........
 
 -	How 	many nucleotides?
 -	Compute theta and pi diversity
-Real example
 
-The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341).
+#### Real example
 
-A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/).
+The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341). A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/). It runs only in windows.
 
-Install the program and upload fasta file.
-
-Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
-
-Compare both Tajima's and Watterson's estimators.
+- Install DNAsp the program and upload fasta file.
+- Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
+- Compare both Tajima's and Watterson's estimators.
