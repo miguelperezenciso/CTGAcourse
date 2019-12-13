@@ -9,6 +9,7 @@ http://grunwaldlab.github.io/Population_Genetics_in_R/
 PopGenome: An Efficient Swiss Army Knife for Population Genomic Analyses
 https://cran.r-project.org/web/packages/PopGenome/
 
+### Genetic Drift
 Simple genetic drift program
  
     #----- simulates drift
@@ -49,4 +50,33 @@ EXERCISES
 - try different sizes (N) an dinitial frequencies (p)
 - What is the probability of fixation of allele 1 ?
 
+### Metrics of nucleotide diversity
+
+There are numerous metrics for DNA variability. The two main ones are Watterson’s estimate ([theta](https://en.wikipedia.org/wiki/Watterson_estimator)) and Tajima’s diversity ([pi](https://en.wikipedia.org/wiki/Nucleotide_diversity)). Watterson's metrics depends on the number of SNPs per sequence length. Tajima’s diversity estimate is the average number of allele differences between all pairs of individuals. In all cases, the estimator must be divided by the number of base pairs analyzed.
+
+Under a neutral model (i.e., only drift, panmixia and constant effective size), both estimators should be the same.
   
+TOY EXERCISE
+Here is a list of 7 aligned sequences
+
+AAATTTTCCGGCA
+.............
+..T.........G
+.............
+......A......
+.........C...
+..T..........
+
+-	How 	many nucleotides?
+-	Compute theta and pi diversity
+Real example
+
+The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341).
+
+A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/).
+
+Install the program and upload fasta file.
+
+Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
+
+Compare both Tajima's and Watterson's estimators.
