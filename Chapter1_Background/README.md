@@ -77,3 +77,11 @@ The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcou
 - Install DNAsp the program and upload fasta file.
 - Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
 - Compare both Tajima's and Watterson's estimators.
+
+# Breeding
+
+- Write an R function that returns mean of populations given allele effects and frequencies
+- Same but returning mean of crosses between two lines
+
+# Simulation
+Simulation is a key tool in many quantitative genetics applications. Give a thought at how would you design a program to simulate a F2 cross between two inbred lines.
