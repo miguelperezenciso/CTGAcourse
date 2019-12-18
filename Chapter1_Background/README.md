@@ -117,6 +117,11 @@ EXERCISES
 - What is the expected distribution of p-values under the null-hypothesis (no association)?
 - R package 'FDR' (https://www.rdocumentation.org/packages/astsa/versions/1.9/topics/FDR) can used to obtain adjusted p-values by multiple testing. Check documentation and examples.
 
+## Statistics vs. Machine Learning
+- Machine Learning is a wide field related to developing algorithms that can automatically identify patterns in data (and use them for prediction of future records).
+- Statistics and ML can be highly interrelated with many shared concepts and procedures (albeit often with distinct vocabulary).
+- Historically, ML has been developed by Computer Scientists whereas Statistics has been linked to Mathematical Faculties. This is no longer true, especially with intensive use of computers by modern Statistics.
+
 ## 3. Breeding
 
 EXERCISES
