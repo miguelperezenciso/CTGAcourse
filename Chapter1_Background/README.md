@@ -98,6 +98,14 @@ EXERCISE:
 ## 2. Statistics: "In God we trust, all others bring data"*
 * Found in Found in Tibshirani et al., attributed to both Deming and Heyden
 
+The term 'Statistics' and 'State' share the same etimology, as Statistics was initially (end 18th century) a means for the State to have censuses that make it possible to collect taxes as efficiently as possible. The real importance of Statistics in science lies in its role as quantifying uncertainty. In modern times, the concepts of **inference** and **model** are central to this goal. You should not believe that scientists are necessarily rational, well behaved people. Statistics is not a coherent and unified framework, many different schools (frequentist, Bayesian, non parametric) coexist and many angry disputes have been witnessed.
+
+## Statistical Model
+* A model is an abstraction of reality, it never exists a true model.
+* 'The value of a model is that it often suggests a simple summary of data in terms of the major systematic effects together with a summary of the nature and amount of unexplained variation' (McCullagh and Nelder, 1983).
+* Two desirable characteristics of a model are parsimony and goodness of fit.
+
+* More importantly a model in Quantitative Genetics is also a definition of a trait. For instance, 
 
 
 ## 3. Breeding
