@@ -103,9 +103,12 @@ The term 'Statistics' and 'State' share the same etimology, as Statistics was in
 ## Statistical Model
 * A model is an abstraction of reality, it never exists a true model.
 * 'The value of a model is that it often suggests a simple summary of data in terms of the major systematic effects together with a summary of the nature and amount of unexplained variation' (McCullagh and Nelder, 1983).
-* Two desirable characteristics of a model are parsimony and goodness of fit.
+* Two desirable characteristics of a model are parsimony and goodness of fit. Here, the key is to find an optimum goodness of fit with the minimum number of parameters that maximizes the predictive ability of the model.
+* More importantly a model in Quantitative Genetics is also a definition of a trait. For instance, the image shows a QTL profile with the same phenotype corrected by either age or weight ([Pérez-Enciso et al.](https://academic.oup.com/jas/article/78/10/2525/4670866)).
 
-* More importantly a model in Quantitative Genetics is also a definition of a trait. For instance, 
+![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2016-25-05.png)
+
+## Multiple testing
 
 
 ## 3. Breeding
