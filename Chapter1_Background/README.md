@@ -41,7 +41,7 @@ Here is a list of 7 aligned sequences
 -	Compute theta and pi diversity
 
 #### Real example
-The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341). A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/). It runs only in windows.
+The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341). A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/). **It runs only in windows**.
 
 - Install DNAsp the program and upload fasta file.
 - Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
@@ -90,14 +90,19 @@ EXERCISES
 - What is the probability of fixation of allele 1 ?
 
 ### Admixture
+The degree of differentiation between populations is usually measured with the Fst statistics. Sewall Wright defined Fst as the correlation between gametes chosen randomly from within the same subpopulation relative to the entire population. (https://www.nature.com/articles/nrg2611) 
+
 EXERCISE:
 - Write an R function to compute genotype frequencies of an admixed population. Parameters needed are allele frequencies in each population (p1, p2), and fraction of individuals from population 1 in admixed population (m1, logically m2=1-m1). We assume Hardy-Weinberg equilibrium within each founder population.
 
-## 2. Statistics
+## 2. Statistics: "In God we trust, all others bring data"*
+* Found in Found in Tibshirani et al., attributed to both Deming and Heyden
+
 
 
 ## 3. Breeding
 
+EXERCISES
 - Write an R function that returns mean of populations given allele effects and frequencies
 - Same but returning mean of crosses between two lines
 
