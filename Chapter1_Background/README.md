@@ -1,3 +1,4 @@
+[](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2013-44-59.png)
 # Background
 
 Here we go over a few basic concepts in Population Genetics and in Statistics that are useful for grasping the subleties of CTGA.
