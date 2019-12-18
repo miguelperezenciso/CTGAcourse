@@ -1,6 +1,8 @@
 ![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2013-44-59.png)
 # Background
-In this chapter, we go over basic concepts in Population Genetics and in Statistics that are useful for grasping the subleties of CTGA.
+In this chapter, we go over basic concepts in Population Genetics, Statistics and Bionformatics that are useful for grasping the subleties of CTGA. 
+
+# 1. Population Genetics
 
 Some popular R packages for population genetics
 Population genetics in R
@@ -78,10 +80,16 @@ The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcou
 - Compute diversity estimates for the whole set of samples and separately by continent (Europe vs. Asia). 
 - Compare both Tajima's and Watterson's estimators.
 
-# Breeding
+## 2. Statistics
+
+
+## 3. Breeding
 
 - Write an R function that returns mean of populations given allele effects and frequencies
 - Same but returning mean of crosses between two lines
 
 # Simulation
 Simulation is a key tool in many quantitative genetics applications. Give a thought at how would you design a program to simulate a F2 cross between two inbred lines.
+
+## 4. Bioinformatics
+
