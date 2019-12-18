@@ -1,4 +1,3 @@
-![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2013-44-59.png)
 # Background
 In this chapter, we go over basic concepts in Population Genetics, Statistics and Bionformatics that are useful for grasping the subleties of CTGA. This section is covered by three ppt files:
 
