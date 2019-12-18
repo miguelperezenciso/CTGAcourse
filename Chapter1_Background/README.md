@@ -24,12 +24,9 @@ https://cran.r-project.org/web/packages/PopGenome/
 
 
 ### Metrics of nucleotide diversity
-
-There are numerous metrics for DNA variability. The two main ones are Watterson’s estimate ([theta](https://en.wikipedia.org/wiki/Watterson_estimator)) and Tajima’s diversity ([pi](https://en.wikipedia.org/wiki/Nucleotide_diversity)). Watterson's metrics depends on the number of SNPs per sequence length. Tajima’s diversity estimate is the average number of allele differences between all pairs of individuals. In all cases, the estimator must be divided by the number of base pairs analyzed.
-
-Under a neutral model (i.e., only drift, panmixia and constant effective size), both estimators should be the same.
+Broadly, mutation generates new variability whereas drift erodes it. A basic question is then measuring genetic variability. There are numerous metrics for DNA variability. The two main ones are Watterson’s estimate ([theta](https://en.wikipedia.org/wiki/Watterson_estimator)) and Tajima’s diversity ([pi](https://en.wikipedia.org/wiki/Nucleotide_diversity)). Watterson's metrics depends on the number of SNPs per sequence length. Tajima’s diversity estimate is the average number of allele differences between all pairs of individuals. In all cases, the estimator must be divided by the number of base pairs analyzed. Under a neutral model (i.e., only drift, panmixia and constant effective size), both estimators should be the same. Differences between both estimators appear because of selection or demographic events (bottlenecks, admixture, ...).
   
-#### TOY EXERCISE
+#### Toy exercise
 Here is a list of 7 aligned sequences
 
     AAATTTTCCGGCA
@@ -40,11 +37,10 @@ Here is a list of 7 aligned sequences
     ......A......
     ..T..........
     
--	How 	many SNPs?
+-	How many SNPs?
 -	Compute theta and pi diversity
 
 #### Real example
-
 The attached file [MC1R_pigs.fasta](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/MC1R_Pigs_aligned.fasta) contains a list of pig MC1R gene sequences (Fang et al. 2018, Contrasting Mode of Evolution at a Coat Color Locus in Wild and Domestic Pigs, https://doi.org/10.1371/journal.pgen.1000341). A very popular software to analyze sequence data in a small scale is DNASp (http://www.ub.edu/dnasp/). It runs only in windows.
 
 - Install DNAsp the program and upload fasta file.
@@ -71,7 +67,8 @@ Simple genetic drift program
     }
 
 
-EXERCISE: Guess what the program does and why
+EXERCISE
+- Guess what the program does and why.
 
 Running the drift R function
 
@@ -91,6 +88,10 @@ Running the drift R function
 EXERCISES 
 - try different sizes (N) an dinitial frequencies (p)
 - What is the probability of fixation of allele 1 ?
+
+### Admixture
+EXERCISE:
+- Write an R function to compute genotype frequencies of an admixed population. Parameters needed are allele frequencies in each population (p1, p2), and fraction of individuals from population 1 in admixed population (m1, logically m2=1-m1). We assume Hardy-Weinberg equilibrium within each founder population.
 
 ## 2. Statistics
 
