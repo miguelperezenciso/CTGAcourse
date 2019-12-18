@@ -1,8 +1,20 @@
 ![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2013-44-59.png)
 # Background
-In this chapter, we go over basic concepts in Population Genetics, Statistics and Bionformatics that are useful for grasping the subleties of CTGA. 
+In this chapter, we go over basic concepts in Population Genetics, Statistics and Bionformatics that are useful for grasping the subleties of CTGA. This section is covered by three ppt files:
+
+- [Population Genetics and Statistics concepts](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/CTGA_Chap1a_Background_pptx.pdf)
+- [Breeding Basics](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/CTGA_Chap1b_Breeding_pptx.pdf)
+- [Some Bioinformatics Applications](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/CTGA_Chap1c_Bioinformatics_pptx.pdf)
 
 # 1. Population Genetics
+Ultimately, the goal is to identify genetic and phenotypic variabilities. The sources of genetic variation are:
+
+- Mutation: the ultimate source of all variability, due to replication errors. Note that only germline mutations are relevant for our purposes. Mutation is a rare process, from where it follows that SNP frequencies are also low.
+- Recombination: Much has been debated on the evolutionary advantages of recombination; it allows shuffling extant allele combinations and improve adaptation to changing environments. NOTE: GWAS only apply in the presence of recombination. GWAS and Y or mitochondrial genomes make no sense.
+- Genetic drift: It refers to the random sampling of haplotypes transmitted to offspring. Its strength is governed by the famous concept of **effective population size**.
+- Selection: In this context, we are mainly interested in artificial selection, also called **directional selection**. There are many variants of selection: balnacing Selection affects only a small subset of loci, whereas drift influences the whole genome.
+
+- Migration
 
 Some popular R packages for population genetics
 Population genetics in R
