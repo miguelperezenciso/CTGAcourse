@@ -96,9 +96,11 @@ EXERCISE:
 - Write an R function to compute genotype frequencies of an admixed population. Parameters needed are allele frequencies in each population (p1, p2), and fraction of individuals from population 1 in admixed population (m1, logically m2=1-m1). We assume Hardy-Weinberg equilibrium within each founder population.
 
 ## 2. Statistics: "In God we trust, all others bring data"*
-* Found in Found in Tibshirani et al., attributed to both Deming and Heyden
+(Found in Tibshirani et al., attributed to both Deming and Heyden)
 
-The term 'Statistics' and 'State' share the same etimology, as Statistics was initially (end 18th century) a means for the State to have censuses that make it possible to collect taxes as efficiently as possible. The real importance of Statistics in science lies in its role as quantifying uncertainty. In modern times, the concepts of **inference** and **model** are central to this goal. You should not believe that scientists are necessarily rational, well behaved people. Statistics is not a coherent and unified framework, many different schools (frequentist, Bayesian, non parametric) coexist and many angry disputes have been witnessed.
+* The term 'Statistics' and 'State' share the same etimology, as Statistics was initially (end 18th century) a means for the State to have censuses that make it possible to collect taxes as efficiently as possible. 
+* The real importance of Statistics in science lies in its role as quantifying uncertainty. In modern times, the concepts of **inference** and **model** are central to this goal. 
+* You should not believe that scientists are necessarily rational, well behaved people. Statistics is not a coherent and unified framework. Many different statistical schools (frequentist, Bayesian, non parametric) coexist and many angry disputes have been witnessed in the past.
 
 ## Statistical Model
 * A model is an abstraction of reality, it never exists a true model.
@@ -109,7 +111,11 @@ The term 'Statistics' and 'State' share the same etimology, as Statistics was in
 ![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/Chapter1_Background/Screenshot%20from%202019-12-18%2016-25-05.png)
 
 ## Multiple testing
+Is one of the most interesting aspects of Statistical applications to modern Genomics. This is because the number of potential variables (eg, SNPs) can be huge. When doing a variable by variable analysis, the probability of false positives will be necesarily high. Benjamini and Hochbergh proposed insted of controlling for **False Discovery Rate**. FDR quantifies, for a given significance threshold, the expected frequency of false results that are above the threshold. this is called the 'q-value' by contrast with standard 'p-value'.
 
+EXERCISES
+- What is the expected distribution of p-values under the null-hypothesis (no association)?
+- R package 'FDR' (https://www.rdocumentation.org/packages/astsa/versions/1.9/topics/FDR) can used to obtain adjusted p-values by multiple testing. Check documentation and examples.
 
 ## 3. Breeding
 
