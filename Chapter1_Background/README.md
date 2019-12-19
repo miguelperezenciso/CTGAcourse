@@ -12,7 +12,7 @@ Ultimately, the goal is to identify genetic and phenotypic variabilities. The so
 - Recombination: Much has been debated on the evolutionary advantages of recombination; it allows shuffling extant allele combinations and improve adaptation to changing environments. NOTE: GWAS only apply in the presence of recombination. GWAS and Y or mitochondrial genomes make no sense.
 - Genetic drift: It refers to the random sampling of haplotypes transmitted to offspring. Its strength is governed by the famous concept of **effective population size**.
 - Selection: In this context, we are mainly interested in artificial selection, also called **directional selection**. There are many variants of selection: balancing, background, etc. Selection affects only a small subset of loci, whereas drift influences the whole genome.
-- Migration refers to individuals moving from one population to another, and causes **admixture** or **genetic structure**. You can visualize structure with a principal component analyses (PCA).
+- Migration refers to individuals moving from one population to another, and causes **admixture**. By **genetic structure** we mean that individuals in the same sample may come from different populations or that some samples are admixed. You can visualize genetic structure with a principal component analyses (PCA).
 
 Some popular R packages for population genetics:
 
@@ -113,7 +113,7 @@ EXERCISE:
 Is one of the most interesting aspects of Statistical applications to modern Genomics. This is because the number of potential variables (eg, SNPs) can be huge. When doing a variable by variable analysis, the probability of false positives will be necesarily high. Benjamini and Hochbergh proposed insted of controlling for **False Discovery Rate**. FDR quantifies, for a given significance threshold, the expected frequency of false results that are above the threshold. this is called the 'q-value' by contrast with standard 'p-value'.
 
 EXERCISES
-- What is the expected distribution of p-values under the null-hypothesis (no association)?
+- What is the expected distribution of p-values under the null-hypothesis (no association)? 
 - R package 'FDR' (https://www.rdocumentation.org/packages/astsa/versions/1.9/topics/FDR) can used to obtain adjusted p-values by multiple testing. Check documentation and examples.
 
 ## Statistics vs. Machine Learning
