@@ -18,4 +18,6 @@ Not all chapters are equally well developed, especially the machine learning one
 
 This course was first taught in wonderful Salvador de Bahia in November 2018 thanks to my good friend and former student Luis Fernando Batista, from [UFBA](https://www.ufba.br/).
 
+![](https://github.com/miguelperezenciso/CTGAcourse/blob/master/private-historic-salvador.jpg)
+
 ### These notes are somewhat incomplete but will be improving in the very near future.
